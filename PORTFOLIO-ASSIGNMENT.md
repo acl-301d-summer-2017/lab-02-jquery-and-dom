@@ -49,3 +49,4 @@ JS
 - Create a `.js` file with the appropriate methods to help modify your source data to help render it to the DOM:
 - Use jQuery to `clone` the example markup for each project, as you add additional content.
 - Your "Project" prototype should have a `.toHtml()` function that adds new data to the DOM.
+- Include an `.eslintrc` file so that we'll be using the same rules and make sure you pass.
