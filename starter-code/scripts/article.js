@@ -22,7 +22,7 @@ Article.prototype.toHtml = function() {
   sure we're not accidentally hiding our cloned article! */
 
   $newArticle.removeClass('template');
-  
+
   if (!this.publishedOn) { $newArticle.addClass('draft'); }
   $newArticle.attr('data-category', this.category);
 
@@ -34,6 +34,12 @@ Article.prototype.toHtml = function() {
     3. article title,
     4. article body, and
     5. publication date. */
+  $newArticle.find('a').text(this.author).attr('href', this.authorUrl);
+  $newArticle.find('h1').text(this.title);
+  $newArticle.find('.article-body').html(this.body);
+  $newArticle.find('time').text(this.publishedOn);
+  
+  
 
   // Display the date as a relative number of 'days ago'
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
@@ -54,3 +60,5 @@ rawData.forEach(function(articleObject) {
 articles.forEach(function(article) {
   $('#articles').append(article.toHtml());
 });
+
+
