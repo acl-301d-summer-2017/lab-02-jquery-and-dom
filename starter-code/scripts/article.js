@@ -14,8 +14,8 @@ Article.prototype.toHtml = function() {
   with a class of template a display of none. Let's make
   sure we're not accidentally hiding our cloned article! */
 
-  if (!this.publishedOn) $newArticle.addClass('draft');
-  $newArticle.data('category', this.category);
+  if (!this.publishedOn) { $newArticle.addClass('draft'); }
+  $newArticle.attr('data-category', this.category);
 
   /* TODO: Now use jQuery traversal and setter methods to fill in the rest
   of the current template clone with properties from this particular Article instance.
