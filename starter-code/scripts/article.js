@@ -15,15 +15,16 @@ function Article (rawDataObj) {
 
 Article.prototype.toHtml = function() {
   var $newArticle = $('article.template').clone();
-  /* TODO: This cloned article still has a class of template.
+  /* DONE TODO: This cloned article still has a class of template.
   However, in our modules.css stylesheet, we gave all elements
   with a class of template a display of none. Let's make
   sure we're not accidentally hiding our cloned article! */
   $newArticle.removeClass('template');
+
   if (!this.publishedOn) { $newArticle.addClass('draft'); }
   $newArticle.attr('data-category', this.category);
 
-  /* TODO: Now use jQuery traversal and setter methods to fill in the rest
+  /* DONE (?) TODO: Now use jQuery traversal and setter methods to fill in the rest
   of the current template clone with properties from this particular Article instance.
   We need to fill in:
     1. author name,
@@ -31,6 +32,12 @@ Article.prototype.toHtml = function() {
     3. article title,
     4. article body, and
     5. publication date. */
+
+  $('a').text(this.author);
+  $('a').attr('href', this.authorURL);
+  $('h1').text(this.title);
+  $('.article-body').text(this.body);
+  $('time[datetime="2000-01-01"]').attr('datetime', this.publishedOn);
 
   // Display the date as a relative number of 'days ago'
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
