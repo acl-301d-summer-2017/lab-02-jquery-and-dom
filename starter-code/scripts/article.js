@@ -17,7 +17,7 @@ Article.prototype.toHtml = function() {
   var $newArticle = $('article.template').clone();
   $newArticle.removeClass('template');
   
-  /* TODO: This cloned article still has a class of template.
+  /* DONE This cloned article still has a class of template.
   However, in our modules.css stylesheet, we gave all elements
   with a class of template a display of none. Let's make
   sure we're not accidentally hiding our cloned article! */
@@ -25,6 +25,10 @@ Article.prototype.toHtml = function() {
 
   if (!this.publishedOn) { $newArticle.addClass('draft'); }
   $newArticle.attr('data-category', this.category);
+
+
+  $newArticle.find('a').text(this.author);
+  $newArticle.find('a').attr('href', this.authorURL);
 
   /* TODO: Now use jQuery traversal and setter methods to fill in the rest
   of the current template clone with properties from this particular Article instance.
@@ -34,6 +38,8 @@ Article.prototype.toHtml = function() {
     3. article title,
     4. article body, and
     5. publication date. */
+
+
 
   // Display the date as a relative number of 'days ago'
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
