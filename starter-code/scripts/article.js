@@ -25,7 +25,7 @@ Article.prototype.toHtml = function() {
 
   if (!this.publishedOn) { $newArticle.addClass('draft'); }
   $newArticle.attr('data-category', this.category);
-  $newArticle.find('a').html(this.author).attr('href', this.authorUrl);
+  $newArticle.find('a').html(this.author).attr('href', this.authorURL);
   $newArticle.find('h1').html(this.title);
   $newArticle.find('section').html(this.body);
   $newArticle.find('time').html(this.publishedOn);
