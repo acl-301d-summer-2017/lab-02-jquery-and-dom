@@ -2,7 +2,7 @@
 
 var articles = [];
 
-function Article (rawDataObj) {
+function Article ( rawDataObj ) {
   // DONE: Use the JS object passed in to complete this constructor function:
   // Save ALL the properties of `rawDataObj` into `this`
   this.title = rawDataObj.title;
@@ -16,18 +16,18 @@ function Article (rawDataObj) {
 Article.prototype.toHtml = function() {
   var $newArticle = $('article.template').clone();
   $newArticle.removeClass('template');
+  if (!this.publishedOn) { $newArticle.addClass('draft'); }
   
   /* DONE This cloned article still has a class of template.
   However, in our modules.css stylesheet, we gave all elements
   with a class of template a display of none. Let's make
   sure we're not accidentally hiding our cloned article! */
 
-  if (!this.publishedOn) { $newArticle.addClass('draft'); }
   $newArticle.attr('data-category', this.category);
   $newArticle.find('a').text(this.author);
   $newArticle.find('a').attr('href', this.authorUrl);
   $newArticle.find('h1').text(this.title);
-  $newArticle.find('.article-body').text(this.body);
+  $newArticle.find('.article-body').html(this.body);
   $newArticle.find('time').text(this.publishedOn);
   
   /* DONE: Now use jQuery traversal and setter methods to fill in the rest
@@ -50,10 +50,16 @@ rawData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
-rawData.forEach(function(articleObject) {
+rawData.forEach( function( articleData ) {
   // REVIEW: Take a look at this forEach method; This may be the first time we've seen it.
-  articles.push(new Article(articleObject));
+  articles.push( new Article( articleData ) );
 });
+
+// as a for loop
+// for ( var i = 0; i < rawData.length; i ++ ) {
+//   articles.push( new Article( rawData[i] ) );
+// }
+
 
 articles.forEach(function(article) {
   $('#articles').append(article.toHtml());
